@@ -11,8 +11,8 @@
 	<groupId>com.company</groupId>
 	<artifactId>libraryapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>libraryapi</name>
-	<description>libraryapi</description>
+	<name>libraryApi</name>
+	<description>libraryApi</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
