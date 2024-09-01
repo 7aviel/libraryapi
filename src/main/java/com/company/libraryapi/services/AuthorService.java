@@ -3,16 +3,16 @@ package com.company.libraryapi.services;
 import com.company.libraryapi.persistence.entities.AuthorEntity;
 import com.company.libraryapi.persistence.repositories.AuthorRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AuthorService {
 
-    @Autowired
     private AuthorRepository authorRepository;
 
     @Transactional
@@ -32,4 +32,8 @@ public class AuthorService {
         return authorRepository.getByName(name);
     }
 
+    @Transactional
+    public void updateAuthor(Long id, String authorName) {
+        authorRepository.updateAuthorName(id, authorName);
+    }
 }

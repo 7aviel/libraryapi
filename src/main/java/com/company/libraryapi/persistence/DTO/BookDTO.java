@@ -1,15 +1,13 @@
 package com.company.libraryapi.persistence.DTO;
 
 import com.company.libraryapi.persistence.entities.BookEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BookDTO {
     private boolean alta;
     private Integer year;

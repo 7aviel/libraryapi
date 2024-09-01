@@ -2,12 +2,12 @@ package com.company.libraryapi.controller;
 
 import com.company.libraryapi.persistence.DTO.BookDTO;
 import com.company.libraryapi.persistence.entities.AuthorEntity;
-import com.company.libraryapi.persistence.entities.BookEntity;
 import com.company.libraryapi.persistence.entities.EditorialEntity;
 import com.company.libraryapi.services.AuthorService;
 import com.company.libraryapi.services.BookService;
 import com.company.libraryapi.services.EditorialService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class RestController {
     }
 
     @GetMapping("/author/{id}")
-    public Optional<AuthorEntity> getById(@PathVariable long id){
+    public Optional<AuthorEntity> getById(@PathVariable Long id){
         return authorService.getAuthorById(id);
     }
 
@@ -63,8 +63,14 @@ public class RestController {
     }
 
     @GetMapping("/books")
-    public List<BookEntity> getBooks(){
-        return bookService.getBooks();
+    public List<BookDTO> getBooks(){
+        return bookService.getBookData();
+    }
+
+    @PutMapping("/author/{id}")
+    public ResponseEntity<Void> updateAuthor(@PathVariable Long id,@RequestParam String authorName){
+        authorService.updateAuthor(id,authorName);
+        return ResponseEntity.ok().build();
     }
 
 
