@@ -1,5 +1,6 @@
 package com.company.libraryapi.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class BookEntity {
             targetEntity = EditorialEntity.class
     )
     @JoinColumn(nullable = false)
+    @JsonBackReference
     private EditorialEntity editorial;
     @ManyToOne(
             fetch = FetchType.LAZY,
@@ -33,6 +35,7 @@ public class BookEntity {
             targetEntity = AuthorEntity.class
     )
     @JoinColumn(nullable = false)
+    @JsonBackReference
     private AuthorEntity author;
 
 

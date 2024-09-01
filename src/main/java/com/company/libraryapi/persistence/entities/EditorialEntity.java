@@ -1,5 +1,6 @@
 package com.company.libraryapi.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,9 +25,7 @@ public class EditorialEntity {
             cascade = CascadeType.PERSIST,
             mappedBy = "editorial"
     )
+    @JsonManagedReference
     private List<BookEntity> books;
 
-    public EditorialEntity(String name) {
-        this.name = name;
-    }
 }

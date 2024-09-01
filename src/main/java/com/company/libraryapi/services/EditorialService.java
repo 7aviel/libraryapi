@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EditorialService {
@@ -16,4 +17,13 @@ public class EditorialService {
     public void saveEditorial(EditorialEntity editorial){
         editorialRepository.save(editorial);
     }
+
+    public Optional<EditorialEntity> getByName(String name){
+        return editorialRepository.getByName(name);
+    }
+
+    public List<EditorialEntity> getEditorials(){
+        return editorialRepository.findAll();
+    }
+
 }

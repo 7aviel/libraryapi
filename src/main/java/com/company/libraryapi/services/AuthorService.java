@@ -28,4 +28,8 @@ public class AuthorService {
         return authorRepository.findById(id);
     }
 
+    public Optional<AuthorEntity> getByName(String name){
+        return authorRepository.getByName(name);
+    }
+
 }

@@ -1,12 +1,13 @@
 package com.company.libraryapi.controller;
 
+import com.company.libraryapi.persistence.DTO.BookDTO;
 import com.company.libraryapi.persistence.entities.AuthorEntity;
 import com.company.libraryapi.persistence.entities.BookEntity;
 import com.company.libraryapi.persistence.entities.EditorialEntity;
 import com.company.libraryapi.services.AuthorService;
 import com.company.libraryapi.services.BookService;
 import com.company.libraryapi.services.EditorialService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,13 +15,12 @@ import java.util.Optional;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class RestController {
 
-    @Autowired
+
     private AuthorService authorService;
-    @Autowired
     private EditorialService editorialService;
-    @Autowired
     private BookService bookService;
 
 
@@ -41,6 +41,10 @@ public class RestController {
         editorialService.saveEditorial(editorial);
         return "editorial added successfully";
     }
+    @GetMapping("/editorial")
+    public List<EditorialEntity> getEditorials(){
+        return editorialService.getEditorials();
+    }
 
     @GetMapping("/author")
     public List<AuthorEntity> getAuthors(){
@@ -53,8 +57,8 @@ public class RestController {
     }
 
     @PostMapping("/book")
-    public String insertBook(@RequestBody BookEntity bookEntity){
-        bookService.saveBook(bookEntity);
+    public String insertBook(@RequestBody BookDTO bookDTO){
+        bookService.saveBook(bookDTO.toEntity(), bookDTO.getAuthorName(),bookDTO.getEditorial());
         return "Book saved successfully";
     }
 

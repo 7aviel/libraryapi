@@ -1,7 +1,7 @@
 package com.company.libraryapi.persistence.entities;
 
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class AuthorEntity {
@@ -24,9 +25,7 @@ public class AuthorEntity {
             orphanRemoval = true,
             mappedBy = "author"
     )
+            @JsonManagedReference
     List<BookEntity> bookList;
 
-    public AuthorEntity(String name) {
-        this.name = name;
-    }
 }
