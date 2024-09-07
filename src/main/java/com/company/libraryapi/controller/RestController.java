@@ -7,6 +7,8 @@ import com.company.libraryapi.services.AuthorService;
 import com.company.libraryapi.services.BookService;
 import com.company.libraryapi.services.EditorialService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,22 +38,22 @@ public class RestController {
         return "author added successfully";
     }
 
-    @PostMapping("/editorial")
+    @PostMapping("/editorials")
     public String saveBook(@RequestBody EditorialEntity editorial){
         editorialService.saveEditorial(editorial);
         return "editorial added successfully";
     }
-    @GetMapping("/editorial")
+    @GetMapping("/editorials")
     public List<EditorialEntity> getEditorials(){
         return editorialService.getEditorials();
     }
 
-    @GetMapping("/author")
+    @GetMapping("/authors")
     public List<AuthorEntity> getAuthors(){
         return authorService.getAuthors();
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/authors/{id}")
     public Optional<AuthorEntity> getById(@PathVariable Long id){
         return authorService.getAuthorById(id);
     }
@@ -67,10 +69,10 @@ public class RestController {
         return bookService.getBookData();
     }
 
-    @PutMapping("/author/{id}")
-    public ResponseEntity<Void> updateAuthor(@PathVariable Long id,@RequestParam String authorName){
+    @PatchMapping("/authors/{id}/{authorName}")
+    public ResponseEntity<Void> updateAuthorName(@PathVariable Long id,@PathVariable String authorName){
         authorService.updateAuthor(id,authorName);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 
