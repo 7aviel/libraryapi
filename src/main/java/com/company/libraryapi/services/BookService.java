@@ -7,6 +7,7 @@ import com.company.libraryapi.persistence.entities.EditorialEntity;
 import com.company.libraryapi.persistence.repositories.BookRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,11 +22,12 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Transactional
-    public void saveBook(BookEntity book, String authorName, String editorial){
+    public void saveBook(@NotNull BookEntity book, String authorName, String editorial){
         AuthorEntity author = authorService.getByName(authorName)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
         book.setAuthor(author);
-        EditorialEntity editorialEntity = editorialService.getByName(editorial).orElseThrow(()-> new RuntimeException("Editorial not found"));
+        EditorialEntity editorialEntity = editorialService.getByName(editorial)
+                .orElseThrow(()-> new RuntimeException("Editorial not found"));
         book.setEditorial(editorialEntity);
         bookRepository.save(book);
     }

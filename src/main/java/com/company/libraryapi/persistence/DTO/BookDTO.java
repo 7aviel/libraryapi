@@ -17,6 +17,7 @@ public class BookDTO {
     private String title;
     private String editorial;
     private String authorName;
+    private byte[] image;
 
     // Getters and setters
 
@@ -28,6 +29,7 @@ public class BookDTO {
         book.setBorrowedCopies(this.borrowedCopies);
         book.setRemainingCopies(this.remainingCopies);
         book.setTitle(this.title);
+        book.setImage(this.getImage());
         return book;
     }
 }

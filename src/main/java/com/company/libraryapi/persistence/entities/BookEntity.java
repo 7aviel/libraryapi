@@ -21,6 +21,8 @@ public class BookEntity {
     private Integer borrowedCopies;
     private Integer remainingCopies;
     private String title;
+    @Lob
+    private byte[] image;
     @ManyToOne(
             fetch = FetchType.LAZY,
             optional = false,

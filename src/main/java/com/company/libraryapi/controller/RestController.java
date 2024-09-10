@@ -7,14 +7,18 @@ import com.company.libraryapi.services.AuthorService;
 import com.company.libraryapi.services.BookService;
 import com.company.libraryapi.services.EditorialService;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5173/")
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -58,10 +62,29 @@ public class RestController {
         return authorService.getAuthorById(id);
     }
 
-    @PostMapping("/book")
-    public String insertBook(@RequestBody BookDTO bookDTO){
+    @PostMapping("/books")
+    public ResponseEntity<Void> insertBook(@RequestParam("alta") boolean alta,
+                                           @RequestParam("year") Integer year,
+                                           @RequestParam("copies") Integer copies,
+                                           @RequestParam("borrowedCopies") Integer borrowedCopies,
+                                           @RequestParam("remainingCopies") Integer remainingCopies,
+                                           @RequestParam("title") String title,
+                                           @RequestParam("authorName") String authorName,
+                                           @RequestParam("editorial") String editorial,
+                                           @NotNull @RequestParam("image")MultipartFile image) throws IOException {
+        BookDTO bookDTO = BookDTO.builder()
+                .alta(alta)
+                .year(year)
+                .copies(copies)
+                .borrowedCopies(borrowedCopies)
+                .remainingCopies(remainingCopies)
+                .title(title)
+                .authorName(authorName)
+                .editorial(editorial)
+                .image(image.getBytes())
+                .build();
         bookService.saveBook(bookDTO.toEntity(), bookDTO.getAuthorName(),bookDTO.getEditorial());
-        return "Book saved successfully";
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/books")
