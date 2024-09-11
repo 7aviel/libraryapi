@@ -22,6 +22,7 @@ public class BookEntity {
     private Integer remainingCopies;
     private String title;
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
     @ManyToOne(
             fetch = FetchType.LAZY,

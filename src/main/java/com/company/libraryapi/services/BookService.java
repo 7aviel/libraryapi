@@ -49,6 +49,7 @@ public class BookService {
                     .copies(book.getCopies())
                     .authorName(book.getAuthor().getName())
                     .editorial(book.getEditorial().getName())
+                    .image(book.getImage())
                     .build());
         }
         return booksData;

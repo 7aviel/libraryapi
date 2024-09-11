@@ -1,6 +1,7 @@
 package com.company.libraryapi.persistence.DTO;
 
 import com.company.libraryapi.persistence.entities.BookEntity;
+import jakarta.persistence.Lob;
 import lombok.*;
 
 @Getter
@@ -17,6 +18,7 @@ public class BookDTO {
     private String title;
     private String editorial;
     private String authorName;
+    @Lob
     private byte[] image;
 
     // Getters and setters

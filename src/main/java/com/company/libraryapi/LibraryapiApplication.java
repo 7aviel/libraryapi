@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages =
 		{"com.company.libraryapi.controller",
 				"com.company.libraryapi.persistence.repositories",
-		"com.company.libraryapi.services"}
+		"com.company.libraryapi.services",
+				"com.company.libraryapi.config"}
 )
 public class LibraryapiApplication {
 
